@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Weather Journal</title>
   <link rel="stylesheet" href="styles/reset.css">
   <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
@@ -16,16 +18,20 @@
     </div>
     <div class="holder zip">
       <label for="zip">Enter Zipcode here</label>
-      <input type="text" id="zip" minlength="5" maxlength="5" placeholder="Enter zip code here e.g. 90210">
+      <input type="text" class="input" id="zip" minlength="5" maxlength="5" placeholder="Zip code, e.g. 90210">
     </div>
     <div class="holder feel">
       <label for="feelings">How are you feeling today?</label>
-      <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
+      <textarea class="input" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
+    </div>
+    <div class="holder button-wrapper">
       <button id="generate" class="button" type="submit"> Generate </button>
     </div>
     <div class="holder entry">
-      <div class="title">Most Recent Entry</div>
-      <div id="entryHolder">
+      <div class="entry__title">
+        <h2 class="headin2">Most Recent Entry:</h2>
+      </div>
+      <div id="entryHolder" class="entry__holder">
         <div class="recent-entry" id="date"></div>
         <div class="recent-entry" id="temp"></div>
         <div class="recent-entry" id="content"></div>

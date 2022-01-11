@@ -4,101 +4,117 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--primary: #009688;
+	--secondary: #;
+}
+
 body {
 	background: #fffff8;
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-	line-height: 120%;
+	font-size: 16px;
+	font: inherit;
 }
 
 #app {
 	display: grid;
-	grid-template-rows: auto auto 1fr 1fr;
+	grid-template-rows: minmax(150px, auto) auto 1fr auto 1fr;
 	/* grid-auto-rows: minmax(150px, auto); */
 	/* grid-template-columns:  */
 	min-height: 100vh;
-	background: #f23557;
-	color: #f0d43a;
+	background: rgb(34, 193, 195);
+	background: linear-gradient(
+		0deg,
+		rgba(34, 193, 195, 1) 0%,
+		rgba(140, 203, 115, 0.5718662464985995) 100%
+	);
+	color: #0c3631;
 	justify-content: center;
 	grid-gap: 1em;
 	font-size: 20px;
 	font-family: 'Oswald', sans-serif;
+	padding: 0 1em 1em;
 }
 
 .holder {
 	display: grid;
 	grid-template-columns: 30% 1fr;
-	gap: 1rem;
-	padding: 2rem;
+	gap: 1em;
 }
 
 .holder.headline {
 	display: flex;
-	padding: 2rem;
-	height: auto;
+	padding: 3rem 0 2rem;
 }
+
+.holder.button-wrapper {
+	display: flex;
+	justify-content: center;
+	padding: 5px 20px 20px;
+}
+
+.holder.entry {
+	padding: 1em;
+	color: ivory;
+	border-radius: 5px;
+}
+
 .entry {
-	background: rgba(59, 74, 107, 0.4);
-	margin: 0 0 2rem 0;
+	background: rgba(59, 74, 107, 0.8);
+	margin: 0 0 2em 0;
 }
 
-#entryHolder {
-}
-
-#date {
-}
-
-#temp {
-}
-
-#content {
-}
-
-.headline {
-}
-.title {
+.entry__title {
+	border-right: 2px solid #f0d43a;
+	padding-right: 0.5em;
 }
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label {
 	display: block;
-	font-size: 27px;
+	font-size: 24px;
+	padding: 5px;
 }
 
-input {
+.input {
 	display: block;
-	width: 320px;
-	background: #22b2da;
+	width: 100%;
+	background: #3678a5;
 	color: #f0d43a;
 	font-size: 20px;
 	font-family: 'Oswald', sans-serif;
 	border: none;
+	padding: 10px 10px 5px;
+	border-radius: 5px;
 }
 
 input:invalid {
-	border: 2px dashed red;
+	outline: 1px dashed red;
 }
 
 .button {
 	max-width: 400px;
-	padding: 1rem;
+	padding: 1rem 3rem;
 	background: #3b4a6b;
 	color: #f0d43a;
-	font-size: 26px;
+	font-size: 24px;
 	font-family: 'Oswald', sans-serif;
 	border: none;
 	box-shadow: 2px 4px 5px #444;
 	border-radius: 5px;
 	cursor: pointer;
 }
-h1 {
-	font-size: 36px;
+.heading1 {
+	font-size: 46px;
+	font-weight: bold;
 }
 
-textarea {
-	background: #22b2da;
-	color: #f0d43a;
-	font-size: 20px;
-	font-family: 'Oswald', sans-serif;
+/* Reset style for HTML element on active to have no border*/
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+	outline: 1px solid black;
 }
 
 /* Style for Placeholder Text*/
@@ -118,4 +134,18 @@ textarea {
 	/* Microsoft Edge */
 	color: #f0d43a;
 	font-family: 'Oswald', sans-serif;
+}
+
+@media only screen and (max-width: 400px) {
+	.holder,
+	.input,
+	label {
+		font-size: 20px;
+	}
+	::placeholder {
+		font-size: 18px;
+	}
+	.holder {
+		gap: 0.5em;
+	}
 }

@@ -1,20 +1,13 @@
 /* Global Variables */
 const genereteButton = document.querySelector('#generate');
-let weatherData = {};
-let url = '';
 const apiKey = '44752acdd691f1a75d1d2edfa1146f32&units=imperial';
-
-// example api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}
 
 // Create a new date instance dynamically with JS
 let date = new Date();
 let currentDate =
 	date.getMonth() + '.' + date.getDate() + '.' + date.getFullYear();
-// Personal API Key for OpenWeatherMap API
-//const apiKeyId = '44752acdd691f1a75d1d2edfa1146f32';
 
 /* Function called by event listener */
-
 const generateWeatherInfo = async () => {
 	// get the zip code value
 	const zip = document.querySelector('#zip').value.trim();
@@ -22,21 +15,20 @@ const generateWeatherInfo = async () => {
 	const feeling = document.querySelector('#feelings').value;
 	// display an error message if there is no zipcode
 	if (!zip) {
-		console.error('Please enter a valid zip code!');
-		//alert('Please enter a zip code!');
+		console.error('Zip code invalid!');
+		alert('Please enter a zip code!');
 		return;
 	}
 
 	getWebApiData(zip)
 		.then(function (data) {
-			weatherData = {
+			console.log(data);
+			postData('/add', {
 				city: data.name,
 				date: currentDate,
 				temp: data.main.temp,
 				content: feeling,
-			};
-			console.log(weatherData);
-			postData('/add', weatherData);
+			});
 		})
 		.then(retrieveData());
 };
@@ -87,7 +79,7 @@ const retrieveData = async (url = '/all') => {
 		// Write updated data to DOM elements
 		document.querySelector('#temp').innerHTML = `Temperature: ${Math.round(
 			allData.temp
-		)} 	\xB0F`;
+		)}\xB0F`;
 		document.querySelector(
 			'#content'
 		).innerHTML = `Feeling: ${allData.content}`;
