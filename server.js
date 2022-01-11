@@ -19,11 +19,10 @@ app.use(express.static('website'));
 // Spin up the server
 const port = 3000;
 const server = app.listen(port, () => {
+	// Callback to debug
 	console.log(`server running`);
 	console.log(`running on localhost: ${port}`);
 });
-
-// Callback to debug
 
 // Initialize all route with a callback function
 app.get('/all', sendData);
@@ -32,3 +31,16 @@ function sendData(req, res) {
 	res.send(projectData);
 }
 // Post Route
+app.post('/add', addData);
+function addData(req, res) {
+	console.log(req.body);
+	newEntry = {
+		city: req.body.city,
+		date: req.body.date,
+		temp: req.body.temp,
+		content: req.body.content,
+	};
+	projectData = newEntry;
+	res.send(projectData);
+	console.log(projectData);
+}
