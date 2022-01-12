@@ -1,6 +1,7 @@
 /* Global Variables */
 const genereteButton = document.querySelector('#generate');
 const apiKey = '44752acdd691f1a75d1d2edfa1146f32&units=imperial';
+// element that would display a messege if the request did not work
 const errorText = document.querySelector('.error-text');
 
 // Create a new date instance dynamically with JS
@@ -14,21 +15,11 @@ const generateWeatherInfo = async () => {
 	const zip = document.querySelector('#zip').value.trim();
 	// const country = document.querySelector('#countrySelect').value;
 	const feeling = document.querySelector('#feelings').value;
-	// display an error message if there is no zipcode
-	if (!zip) {
-		console.error('Zip code invalid!');
-		errorText.innerHTML = 'You must enter a zip code!';
-		errorText.classList.remove('hidden');
-		return;
-	} else if (zip.length !== 5) {
-		errorText.innerHTML = 'Please enter a correct zip code!';
-		errorText.classList.remove('hidden');
-		return;
-	}
 
 	getWebApiData(zip)
 		.then(function (data) {
 			console.log(data);
+
 			postData('/add', {
 				city: data.name,
 				date: currentDate,
