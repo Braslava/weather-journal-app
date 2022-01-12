@@ -34,13 +34,6 @@ function sendData(req, res) {
 app.post('/add', addData);
 function addData(req, res) {
 	console.log(req.body);
-	newEntry = {
-		city: req.body.city,
-		date: req.body.date,
-		temp: req.body.temp,
-		content: req.body.content,
-	};
-	projectData = newEntry;
-	res.send(projectData);
-	console.log(projectData);
+	res.send(req.body);
+	console.log(req.body);
 }
