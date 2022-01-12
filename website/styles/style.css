@@ -59,6 +59,16 @@ body {
 	border-radius: 5px;
 }
 
+.error-text {
+	grid-column-start: 2;
+	font-size: 16px;
+	color: red;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
 .entry {
 	background: rgba(59, 74, 107, 0.8);
 	margin: 0 0 2em 0;
@@ -88,13 +98,8 @@ label {
 	border-radius: 5px;
 }
 
-input:invalid {
-	outline: 1px dashed red;
-}
-
 .button {
-	max-width: 400px;
-	padding: 1rem 3rem;
+	padding: 0.8em 2.6em;
 	background: #3b4a6b;
 	color: #f0d43a;
 	font-size: 24px;
@@ -104,18 +109,23 @@ input:invalid {
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+.button:hover {
+	opacity: 0.8;
+}
+
 .heading1 {
 	font-size: 46px;
 	font-weight: bold;
 }
 
 /* Reset style for HTML element on active to have no border*/
-input:focus,
+/* input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-	outline: 1px solid black;
-}
+	outline:none
+} */
 
 /* Style for Placeholder Text*/
 ::placeholder {
