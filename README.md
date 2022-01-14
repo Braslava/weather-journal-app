@@ -3,6 +3,7 @@
 ## Overview
 
 This project is an asynchronous web app that uses Web API and user data to dynamically update the UI. It fetches informtion from https://openweathermap.org/, sends it to the server and then requests it again to update the UI.
+The application works only for zip codes from the USA.
 
 ## Instructions
 

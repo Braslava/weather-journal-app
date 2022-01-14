@@ -5,10 +5,9 @@ const apiKey = '44752acdd691f1a75d1d2edfa1146f32&units=imperial';
 // Create a new date instance dynamically with JS
 let date = new Date();
 let currentDate =
-	date.getMonth() + '.' + date.getDate() + '.' + date.getFullYear();
+	date.getMonth() + 1 + '.' + date.getDate() + '.' + date.getFullYear();
 
 /* Function called by event listener */
-
 const generateWeatherInfo = async () => {
 	// get the zip code value
 	const zip = document.querySelector('#zip').value.trim();
@@ -16,6 +15,11 @@ const generateWeatherInfo = async () => {
 	// display an error alert if no weather data has been received
 	if (!zip) {
 		alert('Please enter a zip code!');
+		return;
+	}
+	// display an error alert if the zip code is not the right length or contains non-numeric characters
+	if (zip.length !== 5 || zip != zip.match(/^\d+$/)) {
+		alert('Please make sure the zip code is valid!');
 		return;
 	}
 	getWebApiData(zip)
