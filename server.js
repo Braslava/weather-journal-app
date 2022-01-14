@@ -33,7 +33,8 @@ function sendData(req, res) {
 // Post Route
 app.post('/add', addData);
 function addData(req, res) {
-	console.log(req.body);
-	res.send(req.body);
-	console.log(req.body);
+	// projectData = req.body;
+	// res.send(projectData);
+	Object.assign(projectData, req.body);
+	res.send(projectData);
 }

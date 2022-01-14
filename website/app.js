@@ -1,8 +1,6 @@
 /* Global Variables */
 const genereteButton = document.querySelector('#generate');
 const apiKey = '44752acdd691f1a75d1d2edfa1146f32&units=imperial';
-// element that would display a messege if the request did not work
-const errorText = document.querySelector('.error-text');
 
 // Create a new date instance dynamically with JS
 let date = new Date();
@@ -10,16 +8,19 @@ let currentDate =
 	date.getMonth() + '.' + date.getDate() + '.' + date.getFullYear();
 
 /* Function called by event listener */
+
 const generateWeatherInfo = async () => {
 	// get the zip code value
 	const zip = document.querySelector('#zip').value.trim();
-	// const country = document.querySelector('#countrySelect').value;
 	const feeling = document.querySelector('#feelings').value;
-
+	// display an error alert if no weather data has been received
+	if (!zip) {
+		alert('Please enter a zip code!');
+		return;
+	}
 	getWebApiData(zip)
-		.then(function (data) {
+		.then((data) => {
 			console.log(data);
-
 			postData('/add', {
 				city: data.name,
 				date: currentDate,
@@ -27,7 +28,7 @@ const generateWeatherInfo = async () => {
 				content: feeling,
 			});
 		})
-		.then(retrieveData());
+		.then(() => retrieveData('/all'));
 };
 
 /* Function to GET Web API Data*/
@@ -39,13 +40,12 @@ const getWebApiData = async (zipCode, countryCode = 'us') => {
 		const data = await response.json();
 		return data;
 	} catch (error) {
-		console.log('error', error);
 		// appropriately handle the error
+		console.log('error', error);
 	}
 };
 
 /* Function to POST data */
-
 const postData = async (url = '', data = {}) => {
 	const response = await fetch(url, {
 		method: 'POST',
@@ -66,20 +66,17 @@ const postData = async (url = '', data = {}) => {
 };
 
 /* Function to GET Project Data */
-
-const retrieveData = async (url = '/all') => {
+const retrieveData = async (url = '') => {
 	const request = await fetch(url);
 	try {
 		// Transform into JSON
 		const allData = await request.json();
-		//console.log(allData);
+		console.log(allData);
 		// Write updated data to DOM elements
-		document.querySelector('#temp').innerHTML = `Temperature: ${Math.round(
-			allData.temp
-		)}\xB0F`;
-		document.querySelector(
-			'#content'
-		).innerHTML = `Feeling: ${allData.content}`;
+		// prettier-ignore
+		document.querySelector('#temp').innerHTML = `Temperature: ${Math.round(allData.temp)}\xB0F`;
+		// prettier-ignore
+		document.querySelector('#content').innerHTML = `Feeling: ${allData.content}`;
 		document.querySelector('#date').innerHTML = `Date: ${allData.date}`;
 	} catch (error) {
 		console.log('error', error);
