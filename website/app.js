@@ -4,8 +4,13 @@ const apiKey = '44752acdd691f1a75d1d2edfa1146f32&units=imperial';
 
 // Create a new date instance dynamically with JS
 let date = new Date();
-let currentDate =
-	date.getMonth() + 1 + '.' + date.getDate() + '.' + date.getFullYear();
+const options = {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+};
+let currentDate = date.toLocaleDateString('en-EN', options);
+//date.getMonth() + 1 + '.' + date.getDate() + '.' + date.getFullYear();
 
 /* Function called by event listener */
 const generateWeatherInfo = async () => {

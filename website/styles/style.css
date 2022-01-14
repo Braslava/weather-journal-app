@@ -4,11 +4,6 @@
 	box-sizing: border-box;
 }
 
-:root {
-	--primary: #009688;
-	--secondary: #;
-}
-
 body {
 	background: #fffff8;
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
