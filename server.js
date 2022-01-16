@@ -34,7 +34,6 @@ function sendData(req, res) {
 app.post('/add', addData);
 function addData(req, res) {
 	// projectData = req.body;
-	// res.send(projectData);
 	Object.assign(projectData, req.body);
 	res.send(projectData);
 }

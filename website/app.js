@@ -12,6 +12,14 @@ const options = {
 let currentDate = date.toLocaleDateString('en-EN', options);
 //date.getMonth() + 1 + '.' + date.getDate() + '.' + date.getFullYear();
 
+function handleError(error) {
+	console.log('Oh no!');
+	console.log('Error');
+	alert(
+		`Something went wrong. Please chack if you have enetered a valid Zip Code! ${error}`
+	);
+}
+
 /* Function called by event listener */
 const generateWeatherInfo = async () => {
 	// get the zip code value
@@ -37,7 +45,8 @@ const generateWeatherInfo = async () => {
 				content: feeling,
 			});
 		})
-		.then(() => retrieveData('/all'));
+		.then(() => retrieveData('/all'))
+		.catch(handleError);
 };
 
 /* Function to GET Web API Data*/
