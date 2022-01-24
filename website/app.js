@@ -1,6 +1,5 @@
 /* Global Variables */
 const genereteButton = document.querySelector('#generate');
-const apiKey = '44752acdd691f1a75d1d2edfa1146f32&units=imperial';
 
 // Create a new date instance dynamically with JS
 let date = new Date();
@@ -52,10 +51,13 @@ const generateWeatherInfo = async () => {
 /* Function to GET Web API Data*/
 // Write an async function that uses fetch() to make a GET request to the OpenWeatherMap API
 const getWebApiData = async (zipCode, countryCode = 'us') => {
-	url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${countryCode}&appid=${apiKey}`;
+	const url = `/weather/${zipCode},${countryCode}`;
+	// const url = `/weather`;
+	// url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${countryCode}&appid=${apiKey}&units=imperial`;
 	const response = await fetch(url);
 	try {
 		const data = await response.json();
+		console.log(data);
 		return data;
 	} catch (error) {
 		// appropriately handle the error
