@@ -9,13 +9,12 @@ const options = {
 	day: 'numeric',
 };
 let currentDate = date.toLocaleDateString('en-EN', options);
-//date.getMonth() + 1 + '.' + date.getDate() + '.' + date.getFullYear();
 
 function handleError(error) {
 	console.log('Oh no!');
 	console.log('Error');
 	alert(
-		`Something went wrong. Please chack if you have enetered a valid Zip Code! ${error}`
+		`Something went wrong. Please chack if you have enetered a valid Zip Code!`
 	);
 }
 
@@ -49,10 +48,9 @@ const generateWeatherInfo = async () => {
 };
 
 /* Function to GET Web API Data*/
-// Write an async function that uses fetch() to make a GET request to the OpenWeatherMap API
+// Write an async function that uses fetch() to make a GET request to the server to fetch data from the OpenWeatherMap API
 const getWebApiData = async (zipCode, countryCode = 'us') => {
 	const url = `/weather/${zipCode},${countryCode}`;
-	// const url = `/weather`;
 	// url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${countryCode}&appid=${apiKey}&units=imperial`;
 	const response = await fetch(url);
 	try {
@@ -60,7 +58,6 @@ const getWebApiData = async (zipCode, countryCode = 'us') => {
 		console.log(data);
 		return data;
 	} catch (error) {
-		// appropriately handle the error
 		console.log('error', error);
 	}
 };
