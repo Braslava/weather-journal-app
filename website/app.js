@@ -11,8 +11,6 @@ const options = {
 let currentDate = date.toLocaleDateString('en-EN', options);
 
 function handleError(error) {
-	console.log('Oh no!');
-	console.log('Error');
 	alert(
 		`Something went wrong. Please chack if you have enetered a valid Zip Code!`
 	);
@@ -20,17 +18,17 @@ function handleError(error) {
 
 /* Function called by event listener */
 const generateWeatherInfo = async () => {
-	// get the zip code value
-	const zip = document.querySelector('#zip').value.trim();
-	const feeling = document.querySelector('#feelings').value;
-	// display an error alert if no weather data has been received
+	let zip = document.querySelector('#zip').value.trim();
+	let feeling = document.querySelector('#feelings').value;
+	// display an error alert if no weather data has been received of the zip code is not the right length or contains non-numeric characters
 	if (!zip) {
 		alert('Please enter a zip code!');
 		return;
 	}
-	// display an error alert if the zip code is not the right length or contains non-numeric characters
 	if (zip.length !== 5 || zip != zip.match(/^\d+$/)) {
-		alert('Please make sure the zip code is valid!');
+		alert(
+			'Could not get weather data. Please make sure the zip code is valid!'
+		);
 		return;
 	}
 	getWebApiData(zip)
@@ -90,16 +88,24 @@ const retrieveData = async (url = '') => {
 		const allData = await request.json();
 		console.log(allData);
 		// Write updated data to DOM elements
-		// prettier-ignore
-		document.querySelector('#temp').innerHTML = `Temperature: ${Math.round(allData.temp)}\xB0F`;
-		// prettier-ignore
-		document.querySelector('#content').innerHTML = `Feeling: ${allData.content}`;
-		document.querySelector('#date').innerHTML = `Date: ${allData.date}`;
+		updateUi(allData.temp, allData.content, allData.date);
 	} catch (error) {
 		console.log('error', error);
 		// appropriately handle the error
 	}
 };
+
+function updateUi(temp, content, date) {
+	// prettier-ignore
+	document.querySelector('#temp').innerHTML = `Temperature: ${Math.round(temp)}\xB0F`;
+	// prettier-ignore
+	document.querySelector('#content').innerHTML = `Feeling: ${content}`;
+	document.querySelector('#date').innerHTML = `Date: ${date}`;
+}
+
+// function resetForm(){
+// 	document.querySelector('.form').reset();
+// }
 
 // Event listener to add function to existing HTML DOM element
 genereteButton.addEventListener('click', generateWeatherInfo);
